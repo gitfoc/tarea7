@@ -10,17 +10,23 @@ if (isset($_GET["action"]) && isset($_GET["id"]) && $_GET["action"] == "get_dato
     // Se decodifica el fichero JSON y se convierte a array
     $app_info = json_decode($app_info, true);
 ?>
-    <table>
-        <tr>
-            <td>Nombre: </td><td> <?php echo $app_info["nombre"] ?></td>
-        </tr>
-        <tr>
-            <td>Apellidos: </td><td> <?php echo $app_info["apellidos"] ?></td>
-        </tr>
-        <tr>
-            <td>Fecha de nacimiento: </td><td> <?php echo $app_info["nacionalidad"] ?></td>
-        </tr>
-    </table>
+	<p>
+		<td>Nombre: </td><td> <?php echo $app_info["datos"]["nombre"] ?></td>
+	</p>
+	<p>
+		<td>Apellidos: </td><td> <?php echo $app_info["datos"]["apellidos"] ?></td>
+	</p>
+	<p>
+		<td>Fecha de nacimiento: </td><td> <?php echo $app_info["datos"]["nacionalidad"] ?></td>
+	</p>
+    <ul>
+    <!-- Mostramos los libros del autor -->
+    <?php foreach($app_info["libros"] as $libro): ?>
+        <li>
+            <?php echo $libro["titulo"]; ?>
+        </li>
+    <?php endforeach; ?>
+    </ul>	
     <br />
     <!-- Enlace para volver a la lista de autores -->
     <a href="http://localhost/dwes/rest/cliente.php?action=get_lista_autores" alt="Lista de autores">Volver a la lista de autores</a>
@@ -31,7 +37,7 @@ else //sino muestra la lista de autores
     // Pedimos al la api que nos devuelva una lista de autores. La respuesta se da en formato JSON
     $lista_autores = file_get_contents('http://localhost/dwes/rest/api.php?action=get_lista_autores');
     // Convertimos el fichero JSON en array
-	var_dump($lista_autores);
+	//var_dump($lista_autores);
     $lista_autores = json_decode($lista_autores, true);
 ?>
     <ul>
