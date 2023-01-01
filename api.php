@@ -1,7 +1,7 @@
 <?php
 // Esta API tiene dos posibilidades; Mostrar una lista de autores o mostrar la información de un autor específico.
 
-function get_lista_autores(){
+function get_listado_autores(){
 	//Datos de la aplicación, simulando datos en bd
 	$obj = new stdClass();
 	$obj->id="0";
@@ -48,7 +48,7 @@ function get_datos_autor($id){
     return $info_autor;
 }
 
-$posibles_URL = array("get_lista_autores", "get_datos_autor");
+$posibles_URL = array("get_listado_autores", "get_datos_autor");
 
 $valor = "Ha ocurrido un error";
 
@@ -56,8 +56,8 @@ if (isset($_GET["action"]) && in_array($_GET["action"], $posibles_URL))
 {
   switch ($_GET["action"])
     {
-      case "get_lista_autores":
-        $valor = get_lista_autores();
+      case "get_listado_autores":
+        $valor = get_listado_autores();
         break;
       case "get_datos_autor":
         if (isset($_GET["id"]))
